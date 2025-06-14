@@ -14,7 +14,7 @@
         <header class="ppagit">
             <p class="ppag">Enter your academic information:</p>
         </header>
-        <form id="specializationForm" method="post">
+        <form id="specializationForm">
             <div>
                 <label class="cssinformation" for="num">Academic Year:</label>
                 <input id="num" type="number" name="number" min="1" max="4" autofocus required>
@@ -49,20 +49,19 @@
 
             localStorage.setItem("studentSpecialization", selectedValue);
 
-            const form = e.target;
-            form.action = getSpecializationPage(selectedValue);
-            form.submit();
+            const destinationPage = getSpecializationPage(selectedValue);
+            window.location.href = destinationPage;
         });
 
         function getSpecializationPage(specialization) {
             const basePath = window.location.pathname.split("/")[1]; // اسم الريبو
             switch (specialization) {
                 case "Computer networks":
-                    return /${basePath}/CN.html;
+                    return `/${basePath}/CN.html`;
                 case "Cyber security":
-                    return /${basePath}/CSS.html;
+                    return `/${basePath}/CSS.html`;
                 case "Computer science":
-                    return /${basePath}/CS.html;
+                    return `/${basePath}/CS.html`;
                 default:
                     alert("An error occurred, please try again");
                     return "#";
