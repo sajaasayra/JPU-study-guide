@@ -1,10 +1,9 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 
 <head>
-    <title>University major</title>
-    <meta charset="UTF-8" />
-    <link rel="icon" href="logo 4.jpg">
+    <meta charset="UTF-8">
+    <title>University Major</title>
     <link rel="stylesheet" href="1.css">
     <script src="1.js"></script>
 </head>
@@ -21,15 +20,15 @@
             </div>
             <label class="cssinformation">Your university major:</label>
             <div class="major-option">
-                <input type="radio" name="major" id="cs" value="Computer science" required>
+                <input type="radio" name="major" id="cs" value="CS" required>
                 <label for="cs">Computer science</label>
             </div>
             <div class="major-option">
-                <input type="radio" name="major" id="cn" value="Computer networks">
+                <input type="radio" name="major" id="cn" value="CN">
                 <label for="cn">Computer networks</label>
             </div>
             <div class="major-option">
-                <input type="radio" name="major" id="cyber" value="Cyber security">
+                <input type="radio" name="major" id="cyber" value="CSS">
                 <label for="cyber">Cyber security</label>
             </div>
             <input class="save-btn" type="submit" value="Save">
@@ -40,33 +39,21 @@
         document.getElementById('specializationForm').addEventListener('submit', function (e) {
             e.preventDefault();
 
-            const selectedValue = document.querySelector('input[name="major"]:checked')?.value;
+            const selectedMajor = document.querySelector('input[name="major"]:checked')?.value;
 
-            if (!selectedValue) {
-                alert("Please select a major before proceeding.");
+            if (!selectedMajor) {
+                alert("Please select a major.");
                 return;
             }
 
-            localStorage.setItem("studentSpecialization", selectedValue);
+            // Save to localStorage if needed
+            localStorage.setItem("studentSpecialization", selectedMajor);
 
-            const destinationPage = getSpecializationPage(selectedValue);
-            window.location.href = destinationPage;
+            // Redirect to the proper page
+            const repoName = window.location.pathname.split("/")[1];
+            const targetURL = `/${repoName}/${selectedMajor}.html`;
+            window.location.href = targetURL;
         });
-
-        function getSpecializationPage(specialization) {
-            const basePath = window.location.pathname.split("/")[1]; // اسم الريبو
-            switch (specialization) {
-                case "Computer networks":
-                    return `/${basePath}/CN.html`;
-                case "Cyber security":
-                    return `/${basePath}/CSS.html`;
-                case "Computer science":
-                    return `/${basePath}/CS.html`;
-                default:
-                    alert("An error occurred, please try again");
-                    return "#";
-            }
-        }
     </script>
 </body>
 
